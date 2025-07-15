@@ -56,38 +56,38 @@ WALKTHROUGH
 - IP Address 192.168.1.10
 - Default Gateway 192.168.1.1
 
-6. Configure ABC Inc. PC
+5. Configure ABC Inc. PC
 - Click on Desktop > IP Configuration
 - IP Address 192.168.2.10
 - Default Gateway 192.168.2.10
 
-7. Configure Sony Server 
+6. Configure Sony Server 
 - IP Address 192.168.254
 - Default Gateway 192.168.2.1
 
-8. Configure Static Default Route on Employee Router 
+7. Configure Static Default Route on Employee Router 
 - #config t
 - #ip route 0.0.0.0 0.0.0.0 s0/0/0
 
-9. Configure Static Default Route on ABC Inc. Router
+8. Configure Static Default Route on ABC Inc. Router
 - #config t
 - #ip route 0.0.0.0 0.0.0.0 s0/0/1
 
-10. Try to ping from Employee PC to Default Gateway 
+9. Try to ping from Employee PC to Default Gateway 
 - Click on Desktop > Command Prompt
 - C:\>ipconfig
 - C:\>ping 192.168.1.1
 **Should be successful
 
-11. Try to ping from Employee PC to Internet Router
+10. Try to ping from Employee PC to Internet Router
 - C:\>ping 209.165.200.225
 **This ping should fail because the internet router isn’t configured with static routes or dynamic router for Employees network (192.168.1.0/24)
 
-12. Try to ping from Employee PC to ABC Inc. Router 
+11. Try to ping from Employee PC to ABC Inc. Router 
 - C:\>ping 209.165.200.230
 **This ping should also fail because the internet router doesn’t know how to reach Employees network.
 
-13. Configure NAT on Employees Router 
+12. Configure NAT on Employees Router 
 - #ip access-list standard ACL_NAT
 - #permit 192.168.1.0 0.0.0.255
 - #ip nat inside source list ACL_NAT interface s0/0/0 
@@ -96,11 +96,11 @@ WALKTHROUGH
 - #int g0/0
 - #ip nat inside 
 
-14. Try to ping from Employees PC to Internet Router
+13. Try to ping from Employees PC to Internet Router
 - C:\>ping 209.165.200.225
 **Now it should be successful 
 
-15. Try to ping from Employees PC to ABC Inc. Router 
+14. Try to ping from Employees PC to ABC Inc. Router 
 - C:\>ping 209.165.200.230
 **Now it should be successful also 
 
@@ -172,7 +172,7 @@ WALKTHROUGH
 
 <img width="1904" height="767" alt="Screenshot 2025-07-14 at 10 16 45 PM" src="https://github.com/user-attachments/assets/0eaf7169-fb31-42bc-bdfb-c26c8e770d47" />
 
-22. Test with Tracert command  
+21. Test with Tracert command  
 - C:\> tracert 192.168.2.10
 **You should see Two Hoops. First hoop should be ABC Inc. Router (209.165.200.230) and the second hoop should be ABC Inc. PC. (192.168.2.10)
 <img width="1900" height="766" alt="Screenshot 2025-07-14 at 10 16 58 PM" src="https://github.com/user-attachments/assets/f0c5754a-6336-47c0-810c-9e2218eea757" />
